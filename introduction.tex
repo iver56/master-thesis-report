@@ -10,7 +10,7 @@ For decades, music technology has made music more appealing by applying audio ef
     \centering
     \includegraphics[width=0.6\textwidth]{01_simple_signal}
     \caption{Cross-adaptive audio effect process with two audio streams: input audio and target audio}
-    \label{fig:mesh1}
+    \label{fig:simple_signal}
 \end{figure}
 
 In practice, a music performance that uses cross-adaptive audio effects can be a very complex, dynamic system with many signal interactions. However, to limit the scope and complexity of the problem, this project will study signal interactions between only two sounds at a time: an input sound and a target sound. A single audio effect is applied to the input sound. The parameters of this effect are dynamically informed by features from the target audio. The goal of the tool implemented in this project is to make interesting mappings from target audio analysis to audio effect parameters. Brandtsegg (2015) suggested that machine learning can be useful in this context. Generally, for a machine learning problem to be well-defined, a performance measure is needed. A good performance measure would be “how appealing does it sound?”. However, what generally sounds appealing to humans is tacit knowledge and cannot be simply described mathematically. Because there are no good objective measures of what a good cross-adaptive audio effect is, an assumption has been made in this project: If a cross-adaptive audio effect makes features of one sound audible in the other sound, then it is considered interesting. Therefore it has been decided that the objective of the system in this project should be to make the input sound similar to the target sound.

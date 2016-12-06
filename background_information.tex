@@ -1,0 +1,72 @@
+% !TEX encoding = UTF-8 Unicode
+%!TEX root = thesis.tex
+% !TEX spellcheck = en-US
+%%=========================================
+\section{Background information}
+
+\subsection{Genetic algorithms}
+Genetic algorithms (Goldberg, 1989) are iterative algorithms that can approximate solutions to optimization problems. In such problems, one usually doesn’t know how to construct a good solution, but it is possible to measure how good a solution is. The methods used in genetic algorithms are inspired by Darwin's principle of natural selection. In the algorithm, a population of individuals is simulated through generations of “life”. Each individual is a candidate solution to the optimization problem. The fittest individuals, as determined by a fitness function, are the individuals that are most likely to survive and reproduce (either asexually or sexually). Individuals that are deemed less fit are more likely to die young, and don’t get to pass their genes on to future generations. During reproduction, crossover and mutation occurs. Crossover is a genetic operator that combines two parents to produce an offspring. Mutation is a genetic operator that alters an individual slightly.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{02_genetic_algorithm_cycle}
+    \caption{Genetic algorithm cycle}
+    \label{fig:genetic_algorithm_cycle}
+\end{figure}
+
+\subsection{Artificial Neural Networks}
+Artificial Neural Networks (ANN) are systems of interconnected “neurons”, or nodes (Caudill, 1987). A connection from a node A to a different node B means that the activation level of node A influences the activation level of node B based on the numerical weight of the connection. The activation level of a node is calculated by adding up all incoming signals to that node and running that number through the node’s activation function. An ANN can be thought of as a function that transforms n-dimensional vectors to m-dimensional vectors.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{03_neural_network_perceptron}
+    \caption{To the left: Illustration of a small neural network with one hidden layer. To the right: Illustration of a perceptron with sigmoid activation function}
+    \label{fig:neural_network_perceptron}
+\end{figure}
+
+\subsection{Neuroevolution}
+Neuroevolution is a technique that uses evolutionary algorithms to train artificial neural networks. It differs from supervised learning algorithms such as backpropagation in that it does not require a set of correct input-output pairs. Instead, only a performance measure (fitness function) is needed.
+
+\subsection{NeuroEvolution of Augmenting Topologies (NEAT)}
+NEAT (Stanley \& Miikkulainen, 2002) is a neuroevolution technique that evolves neural networks with genetic algorithms. Not only the weights of the ANN are evolved, but also the structure. The NEAT approach begins with a feed-forward approach with input nodes and output nodes that are fully connected. The ANN can then grow larger by having nodes and links added to it. NEAT can also remove nodes and links.
+
+\subsection{Multi-Objective evolutionary algorithm}
+As real-life problems often have more than one objective, there is a need for ways to deal with multiple objectives effectively. A multi-objective evolutionary algorithm (MOEA) is an algorithm for solving mathematical optimization problems involving more than one objective function to be optimized simultaneously (Veldhuizen \& Lamont, 2000). One well-known algorithm of this kind is Nondominated Sorting Genetic Algorithm II (NSGA-II) (Deb, Pratap, Agarwal, \& Meyarivan, 2002). In this algorithm, the performance measure is based primarily on rank and secondarily on crowding distance. Rank is calculated by running the fast non-dominated sort algorithm. This algorithms assigns a rank to each individual. If the rank of individual A is better than the rank of another individual B, it means that A dominates B. Individual A dominates B if both the following conditions are true:
+
+\begin{itemize}  
+\item The solution A is no worse than B in all objectives.
+\item The solution A is strictly better than B in at least one objective.
+\end{itemize}
+
+Crowding distance is a way to measure how crowded the search space around the individual is. Crowding distance is quantified by forming a cuboid with the nearest neighbours as vertices, and then taking the average of the side lengths of the cuboid. Large crowding distances are encouraged because it preserves diversity in the population (Deb, Pratap, Agarwal, \& Meyarivan, 2002).
+
+\subsection{Audio feature extraction tools}
+Audio feature extraction is the process of computing a compact numerical representation that can be used to characterize a segment of audio. Low-level features such as spectral centroid and Mel-Frequency Cepstral Coefficients (MFCC) (Mermelstein, 1976; Logan, 2000) are computed directly from the audio signal, frame by frame. A frame is a slice of audio and can consist of for example 1024 samples. In an audio signal with sampling rate 44.1 kHz, the duration of such a frame would be approximately 23 ms.
+
+Audio features can be used in many different ways, such as music information retrieval and musical genre classification. In this project, they are used for similarity measures and for controlling the parameters of audio effects. Three audio feature extraction tools were used in this project: Aubio (Brossier, 2003), Essentia (Bogdanov et al., 2013) and LibXtract (Bullock, 2007).
+
+\subsection{Audio effects}
+Audio effects are processing techniques that alter audio so it sounds different. In this project, two audio effects are used: Modified hyperbolic tangent and resonant low-pass filter.
+
+Modified hyperbolic tangent is a waveshaping function that can model the characteristics of analog distortion, and especially tube distortion. Modified hyperbolic tangent differs from hyperbolic tangent in that one can model the positive and the negative slopes differently. This distortion effect makes the sound “fuzzier” by adding harmonic components in higher frequencies.
+
+$$mtanh(x)=\frac{e^{ax}-e^{-bx}}{e^{cx}+e^{-dx}}$$
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{04_modified_hyperbolic_tangent_waveform_and_spectrum}
+    \caption{Harmonic frequency components are added to a 440 Hz sine wave by means of waveshaping}
+    \label{fig:modified_hyperbolic_tangent_waveform_and_spectrum}
+\end{figure}
+
+A low-pass filter attenuates high frequencies and retains low frequencies unchanged. It can be used to make a sound “darker” or “smoother” in timbre. A resonant low-pass filter is a low-pass filter that has a peak in the response curve at the cutoff frequency. This quality can be used to boost a single tone in a sound with a rich frequency spectrum. The width of the resonant peak is described by a parameter called Q. As Q increases, the resonance becomes more pronounced.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{05_low_pass_filter}
+    \caption{Frequency response of a resonant low-pass filter with various Q values}
+    \label{fig:low_pass_filter}
+\end{figure}
+
+\subsection{Audio processing tools}
+Audio processing is the alteration of audio signals, typically through audio effects. One popular audio processing tool is Csound (“Csound: Sound and music computing system”, n.d.). This is both an audio programming language and a program that runs Csound code. The Csound program takes in a text file of code. This code is executed by the Csound program. The output is sound that is directed to either an audio interface (live) or to a file (non-real-time processing). Csound is used by musicians and composers, typically in experimental electroacoustic music. Traditionally, it has been an offline tool, due to lack of computational power. Today, computational power is sufficient for Csound to run in real-time, so it can be used in live settings such as concerts and sound installations. Csound can not only run on desktop computers, but can also be used as audio processing engine in mobile applications for the operating systems Android and iOS.
