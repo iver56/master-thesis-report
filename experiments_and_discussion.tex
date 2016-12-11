@@ -1,0 +1,70 @@
+% !TEX encoding = UTF-8 Unicode
+%!TEX root = thesis.tex
+% !TEX spellcheck = en-US
+%%=========================================
+\chapter{Experiments and discussion}
+
+Three experiments have been run in an attempt to measure the feasibility of using neuroevolution for finding useful mappings from audio features to audio effect parameters. Also, in each experiment, different neuroevolution configurations are compared to find what works better. Each configuration gets 20 runs (with different Pseudo Random Number Generator (PRNG) seeds), and the fitness plots show aggregated values. Table 4.1 shows a rough overview of the experiments and their configuration.
+
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Table Title TODO} \label{tab:title} 
+\begin{tabular}{ C{0.70in} C{.9in} C{.90in} C{1.8in} C{1.25in} }\toprule[1.5pt]
+\bf Experiment & \bf Input sound & \bf Target sound & \bf Effect & \bf Parameters compared\\
+\midrule
+  1 & White noise & Drums & Distortion and resonant low-pass filter & Output activation functions \\
+\midrule
+  2 & White noise & Drums & Distortion and resonant low-pass filter & Fitness functions \\
+\midrule
+  3 & White noise & Sine sweep & Resonant low-pass filter & NEAT vs. FS-NEAT \\
+\bottomrule[1.25pt]
+\end {tabular}\par
+\bigskip
+Should be a caption TODO
+\end{minipage}
+
+
+\section{General configuration}
+Table 4.2 TODO shows the parameters used unless otherwise stated in individual experiments
+
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Table Title TODO} \label{tab:title} 
+\begin{tabular}{ C{3.5in} C{1.6in} }\toprule[1.5pt]
+\bf Parameter & \bf Value \\
+\midrule
+  Add neuron probability & 0.03 \\
+\midrule
+  Remove neuron probability & 0.03 \\
+\midrule
+  Add link probability & 0.03 \\
+\midrule
+  Remove link probability & 0.06 \\
+\midrule
+  Elite fraction & 0.1 \\
+\midrule
+  Survival rate & 0.25 \\
+\midrule
+  Allow clones & True \\
+\midrule
+  Selection method & Tournament selection \\
+\midrule
+  Hidden activation function & Hyperbolic tangent \\
+\midrule
+  Output activation function & Sigmoid \\
+\midrule
+  Effect parameter low-pass filter cutoff frequency & 50 Hz \\
+\midrule
+  Population size & 20 \\
+\midrule
+  Number of generations & 20 \\
+\midrule
+  Number of runs & 20 \\
+\bottomrule[1.25pt]
+\end {tabular}\par
+\bigskip
+Should be a caption TODO
+\end{minipage}
+
+\input{experiment1}
+\input{experiment2}
