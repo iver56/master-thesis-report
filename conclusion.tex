@@ -1,0 +1,18 @@
+% !TEX encoding = UTF-8 Unicode
+%!TEX root = thesis.tex
+% !TEX spellcheck = en-US
+%%=========================================
+\chapter{Conclusion}
+It has been shown that using neuroevolution for finding useful mappings in cross-adaptive audio effects is feasible. Several fitness functions have been developed and compared. Based on qualitative evaluations, the hybrid variant, that is a combination of local euclidean distance and NSGA-II-inspired multi-objective optimization, has been found to yield the best results. Furthermore, in experiments with high-dimensional spaces, FS-NEAT has been proven to do better than NEAT, because FS-NEAT chooses only a few useful connections rather than a fully connected neural network. A comprehensive toolkit has been developed during the course of the project. The toolkit includes an interactive visualization tool that makes it easier to evaluate results and understand the neuroevolution process. The toolkit has lots of configuration options, enabling a flexible platform for experimentation. It is open source, and is expected to live on and be used in future research within the field of cross-adaptive audio effects.
+
+\section{Future work}
+
+As stated in the introduction, current research at the Music Technology department at Norwegian University of Science and Technology aims at exploring radically new modes of musical interaction in live music performance. This project is a good start, but there is still a lot to be explored. For example, it would be interesting to try other effects than distortion and resonant low-pass filter. One related idea is to enable the neuroevolution process to be more creative by letting it choose from a pool of audio effects. Further, it should be able to add multiple audio effects and decide the order in which they are applied.
+
+While an evolved neural network may perform well on the input sound and target sound it was trained on, it is desirable to be able to try the same neural network on other sounds to see how well it generalizes. In particular, it would be interesting to try it in live music performances. This requires some architectural changes, as audio needs to be analyzed in real time, preferably with low latency.
+
+Picbreeder (Secretan et al., 2008) and Soundbreeder (Ye \& Shen, 2014) had success with HyperNEAT, which is one variant of NEAT that has not been tried in this project. HyperNEAT might be able to produce better results than NEAT in this project, so that’s worth exploring.
+
+While five different fitness functions have already been developed and compared, the author is fairly certain that further research on this could yield improvements. For example, a (recurrent) neural network that is trained to classify a few classes of sounds could be used for measuring fitness.
+
+The author imagines that methods developed in this project could be used for mastering audio and also for novel crossfading in DJ mixing software. However, that would require smart methods for dealing with long sounds (several minutes). This project has only dealt with short sounds (a few seconds) so far. When dealing with longer sounds the author sees two challenges: 1) Computational time and 2) A long sound might have several very different parts, and the evolved neural network might have trouble dealing well with all of them. One possible solution to these challenges is to chop the long sound into a few short audio segments that represent the different parts of the sound well and then run the program on each audio segment. When applying the resulting neural networks on new sounds, the program can automatically fade between the evolved artificial neural networks based on similarity with the various audio segments they were trained on.
