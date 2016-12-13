@@ -30,6 +30,28 @@ Neuroevolution is a technique that uses evolutionary algorithms to train artific
 \section{NeuroEvolution of Augmenting Topologies (NEAT)}
 NEAT (Stanley \& Miikkulainen, 2002) is a neuroevolution technique that evolves neural networks with genetic algorithms. Not only the weights of the ANN are evolved, but also the structure. The NEAT approach begins with a feed-forward approach with input nodes and output nodes that are fully connected. The ANN can then grow larger by having nodes and links added to it. NEAT can also remove nodes and links.
 
+TODO:
+Competing conventions
+Species
+Genotype (list of nodes, list of connections)
+Phenotype
+Crossover
+Interspecies crossover
+Dynamic compatibility
+Min species
+Max species
+Aging species
+Innovations
+Young age fitness boost
+Species stagnation
+Competitive coevolution stagnation
+Kill worst species each 15 generations
+Survival rate
+Elitism
+Tournament selection
+Sexual vs asexual reproduction?
+Mutation operations
+
 \section{Multi-Objective evolutionary algorithm}
 As real-life problems often have more than one objective, there is a need for ways to deal with multiple objectives effectively. A multi-objective evolutionary algorithm (MOEA) is an algorithm for solving mathematical optimization problems involving more than one objective function to be optimized simultaneously (Veldhuizen \& Lamont, 2000). One well-known algorithm of this kind is Nondominated Sorting Genetic Algorithm II (NSGA-II) (Deb, Pratap, Agarwal, \& Meyarivan, 2002). In this algorithm, the performance measure is based primarily on rank and secondarily on crowding distance. Rank is calculated by running the fast non-dominated sort algorithm. This algorithms assigns a rank to each individual. If the rank of individual A is better than the rank of another individual B, it means that A dominates B. Individual A dominates B if both the following conditions are true:
 
