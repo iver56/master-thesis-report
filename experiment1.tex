@@ -3,7 +3,7 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 1}
-In this experiment, the toolkit is used to make white noise sound like a drum loop that consists of bass drum and snare drum hits. The mfcc\_0 feature is used as neural input and similarity measure. mfcc\_0 measures the spectral energy, so it is expected that the amplitude of the output sound will resemble the amplitude of the drum loop sound. Further, three different output activation functions will be compared.
+In this experiment, the aim is to find a good combination of crossover rate and mutation rate.
 
 \subsection{Configuration}
 \begin{minipage}{\linewidth}
@@ -12,7 +12,7 @@ In this experiment, the toolkit is used to make white noise sound like a drum lo
 \begin{tabular}{ C{3.5in} C{1.6in} }\toprule[1.5pt]
 \bf Parameter & \bf Value \\
 \midrule
-  Number of generationa & 10 \\
+  Number of generations & 20 \\
 \midrule
   Fitness function & Local similarity \\
 \midrule
@@ -22,9 +22,9 @@ In this experiment, the toolkit is used to make white noise sound like a drum lo
 \midrule
   Effect & Distortion and resonant low-pass filter \\
 \midrule
-  Audio features & mfcc\_0 \\
+  Audio features & mfcc\_0, mfcc\_0\_\_derivative, mfcc\_1 \\
 \midrule
-  Output activation function & [Sigmoid, Linear, Sine] \\
+  Number of runs & 250 per configuration \\
 \bottomrule[1.25pt]
 \end {tabular}\par
 \bigskip
@@ -48,28 +48,11 @@ Function LOCAL_SIMILARITY(target, individual):
 where \texttt{EUCLIDEAN\_DISTANCE} is $d(p,q)=\sqrt{(q_1-p_1)^2+(q_2-p_2)+...+(q_n-p_n)^2}$
 
 \subsection{Evaluation of configurations}
-Figure 4.1 TODO shows that the sigmoid activation function yields better results than sine and linear.
+Figure 4.1 TODO shows that ...
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.99\textwidth]{08_plot_output_activation_functions_avg_experiment1}
-    \caption{Average similarity over 20 runs. Three different output activation functions are compared}
-    \label{fig:plot_output_activation_functions_avg_experiment1}
-\end{figure}
-
-\subsection{Evaluation of output sound}
-The results are as expected: The amplitude of the best output sound is quite similar to the amplitude of the target sound. Figure 4.2 TODO shows this in that waveform C looks like waveform A. However, the bass drum hits in the output are not quite as strong as in the target sound. This is because the mfcc\_0 feature is not a pure amplitude measure and yields lower values for the bass drum hits than for the snare hits. Figure 4.3 shows this. Further, the distinction between bass drum and snare drum in the output sound is nonexistent. That will be dealt with in experiment 2, by adding more features for neural input and similarity measure.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.99\textwidth]{09_experiment1_waveform_comparison}
-    \caption{Waveform visualizations of input sound (B), output sound (C) and target sound (A).}
-    \label{fig:experiment1_waveform_comparison}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.99\textwidth]{10_drums_mfcc0_horizon_experiment1}
-    \caption{The mfcc\_0 feature series of the drums sound visualized in a horizon graph}
-    \label{fig:drums_mfcc0_horizon_experiment1}
+    \includegraphics[width=0.99\textwidth]{grid_search_crossover_mutation_avg}
+    \caption{TODO caption}
+    \label{fig:grid_search_crossover_mutation_avg}
 \end{figure}
