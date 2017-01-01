@@ -1,0 +1,41 @@
+% !TEX encoding = UTF-8 Unicode
+%!TEX root = thesis.tex
+% !TEX spellcheck = en-US
+%%=========================================
+
+\chapter{JavaScript libraries in interactive visualization application}
+\label{appendix:javascript_dependencies}
+
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Table Title TODO} \label{tab:title} 
+\begin{tabular}{ C{1.5in} C{4.6in} }\toprule[1.5pt]
+\bf Name & \bf Description \\
+\midrule
+  NodeJS & Used for serving the application and pushing results to the application via websockets whenever new data becomes available \\
+\midrule
+  AngularJS & Application framework that makes it easy to build Single-Page Applications \\
+\midrule
+  Angular-material & User Interface (UI) Component framework. Makes it easy to add UI elements, such as buttons and sliders, that look nice and have great usability. \\
+\midrule
+  Color-brewer & Various sets of colors that are useful for visualizing data \\
+\midrule
+  Cubism & Time series visualization in the form of horizon charts, which reduce vertical space without losing resolution. This is useful when there are many variables to visualize simultaneously in a limited vertical space. \\
+\midrule
+  n3-line-chart & Used for line charts and histograms. Is nicely integrated with AngularJS and features some useful interactions. Depends on D3.js \\
+\midrule
+  NVD3 & Chart components for D3.js. Used for creating stacked area chart (species plot) \\
+\midrule
+  Debounce, limit & Used for throttling the refresh rate of computationally demanding actions \\
+\midrule
+  Sigma & Used for visualizing neural networks. Features zooming, panning and rotating. \\
+\midrule
+  Wavesurfer & Works as an audio player that also visualizes the waveform of the sound that is played. The user can click on the waveform to seek to that position. \\
+\midrule
+  jQuery & Makes it easier to do Document Object Model (DOM) manipulation \\
+
+\bottomrule[1.25pt]
+\end {tabular}\par
+\bigskip
+Should be a caption TODO
+\end{minipage}
