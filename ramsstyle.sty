@@ -7,15 +7,16 @@
 \usepackage{natbib}
 %\usepackage[numbers]{natbib} % Use this command if you want to refer to the literature by numbers, e.g., [1]
 \usepackage{setspace}
-\usepackage{tabularx}
+\usepackage{tabularx} % TODO: remove
+\usepackage{longtable}
 \usepackage{caption}
 \usepackage{ragged2e}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \linespread{1.5}
 
-\newcolumntype{C}[1]{>{\Centering}m{#1}}
-\renewcommand\tabularxcolumn[1]{C{#1}}
+\newcolumntype{C}[1]{>{\Centering}m{#1}} % TODO: remove
+\renewcommand\tabularxcolumn[1]{C{#1}} % TODO: remove
 
 \newenvironment{remark}{\par\mbox{}\par\noindent{\bfseries \emph{Remark}\/}:\normalfont}{\par}
 \newenvironment{defin}{\par\mbox{}\par\noindent\bfseries \emph{\Pointinghand\ }\normalfont}{\par}
