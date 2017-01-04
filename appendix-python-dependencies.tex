@@ -6,40 +6,50 @@
 \chapter{Neuroevolution application dependencies}
 \label{appendix:python_dependencies}
 
-\begin{minipage}{\linewidth}
-\centering
-\captionof{table}{Table Title TODO} \label{tab:title} 
-\begin{tabular}{ C{1.5in} C{4.6in} }\toprule[1.5pt]
-\bf Name & \bf Description \\
-\midrule
-  Jinja2 & A general purpose templating language. Useful for generating csd files that are fed into Csound. \\
-\midrule
-  six, futures & Makes the Python application compatible with both Python 2 and Python 3 \\
-\midrule
-  whichcraft & A tool that can check which programs are installed on the computer. Used for starting Node.js correctly on both Ubuntu and Windows. \\
-\midrule
-  natsort & Natural sorting. Used for showing audio features in the correct order. \\
-\midrule
-  nose & A tool for running all the automated tests in the project \\
-\midrule
-  statistics & A package that can calculate various statistics, for example standard deviation, of data series. \\
-\midrule
-  numpy & A package for scientific computing. Used for computing gradients and euclidean distance. \\
-\midrule
-  matplotlib & A 2D plotting library. Used for creating various plots for this report. \\
-\midrule
-  MultiNEAT & A portable neuroevolution Library written in C++. It has Python bindings. \\
-\midrule
-  Sonic Annotator with Vamp plugin LibXtract & Sonic annotator takes in a set of audio files, runs them through the specified vamp plugin and outputs the results. LibXtract is a library for audio feature extraction. \\
-\midrule
-  Aubio mfcc & A tool that takes in a single audio file and calculates and outputs MFCC coefficients for each frame \\
-\midrule
-  Essentia music extractors & A tool that takes in a single audio file, calculates a large set of audio features and writes the resulting data to a file \\
-\midrule
-  Csound & A sound and music computing system. Csound can be given a piece of Csound code that describes how to process audio, and then Csound processes the audio accordingly. In this project, Csound is used for applying audio effects with effect parameters that vary over time. \\
+\begin{center}
+\begin{longtable}{p{3.3cm} p{13cm}}
+\caption[Dependencies]{Dependencies} \label{tab:neuroevolution_dependencies} \\
 
-\bottomrule[1.25pt]
-\end {tabular}\par
-\bigskip
-Should be a caption TODO
-\end{minipage}
+\hline \multicolumn{1}{l}{\textbf{Name}} & \multicolumn{1}{l}{\textbf{Description}} \\ \hline 
+\endfirsthead
+
+\multicolumn{2}{c}
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\hline \multicolumn{1}{l}{\textbf{Name}} & \multicolumn{1}{l}{\textbf{Description}} \\ \hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline \hline
+\endlastfoot
+
+\midrule
+Jinja2 & A general purpose templating language. Useful for generating csd files that are fed into Csound. \\
+\midrule
+six, futures & Makes the Python application compatible with both Python 2 and Python 3 \\
+\midrule
+whichcraft & A tool that can check which programs are installed on the computer. Used for starting Node.js correctly on both Ubuntu and Windows. \\
+\midrule
+natsort & Natural sorting. Used for showing audio features in the correct order. \\
+\midrule
+nose & A tool for running all the automated tests in the project \\
+\midrule
+statistics & A package that can calculate various statistics, for example standard deviation, of data series. \\
+\midrule
+numpy & A package for scientific computing. Used for computing gradients and euclidean distance. \\
+\midrule
+matplotlib & A 2D plotting library. Used for creating various plots for this report. \\
+\midrule
+MultiNEAT & A portable neuroevolution Library written in C++. It has Python bindings. \\
+\midrule
+Sonic Annotator with Vamp plugin LibXtract & Sonic annotator takes in a set of audio files, runs them through the specified vamp plugin and outputs the results. LibXtract is a library for audio feature extraction. \\
+\midrule
+Aubio MFCC & A tool that takes in a single audio file and calculates and outputs MFCC coefficients for each frame \\
+\midrule
+Essentia music extractors & A tool that takes in a single audio file, calculates a large set of audio features and writes the resulting data to a file \\
+\midrule
+Csound & A sound and music computing system. Csound can be given a piece of Csound code that describes how to process audio, and then Csound processes the audio accordingly. In this project, Csound is used for applying audio effects with effect parameters that vary over time. \\
+
+\end{longtable}
+\end{center}
