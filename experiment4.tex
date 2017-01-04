@@ -3,14 +3,53 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 4}
-In this experiment, the author intends to analyze what NEAT does. TODO
+In this experiment, the aim is to compare two different collections of audio features used in the similarity measure
+
+Configuration A RMS, pitch and spectral centroid
+
+Configuration B RMS, pitch, spectral centroid and bark bands
 
 \subsection{Configuration}
-TODO Noise to sine tone
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Table Title TODO} \label{tab:exp4_configuration} 
+\begin{tabular}{ C{2.5in} C{2.6in} }\toprule[1.5pt]
+\bf Parameter & \bf Value \\
+\midrule
+  Number of generations & 500 \\
+\midrule
+  Fitness function & Local similarity \\
+\midrule
+  Target sound & Sine wave, 440 Hz \\
+\midrule
+  Input sound & White noise \\
+\midrule
+  Effect & Bandpass filter with up to 10x post gain \\
+\midrule
+  Audio features & \textbf{Configuration A}: RMS, pitch and spectral centroid \newline
+  \textbf{Configuration B}: RMS, pitch, spectral centroid and 25 bark bands \\
+\midrule
+  Number of runs & 10 per configuration \\
+\bottomrule[1.25pt]
+\end {tabular}\par
+\bigskip
+Should be a caption TODO
+\end{minipage}
 
-\subsection{TODO}
-TODO Compare bark similarity with rms+pitch+centroid
+\subsection{Evaluation}
+Since fitness functions were different in these two configurations, the fitness values are not directly comparable. Instead, the results were evaluated by manually listening to the output sounds. In the first configuration, the results were fairly bad: All of the sounds were too noisy, and the author failed to perceive the tone. However, in terms of spectral centroid and amplitude, the sounds were a good match. In order to transform noise into a sine, the bandwidth of the bandpass filter has to be very narrow. A narrow filter would have lowered the overall amplitude of the sound. This would have been deemed bad by the fitness function, hence the genetic algorithm didn't effectively explore that area in the solution space. Also, a narrow filter wouldn't have yielded any improvements in the similarity in spectral centroid and/or pitch. Therefore, the typical solution has a broad bandpass filter, albeit with an appropriate center frequency. See in figure \ref{fig:exp4_spectrum_plot} that the peak frequency of the typical output sound matches well the peak frequency of the target sound.
 
-TODO Show neural network. Tell that no hidden nodes are actually needed because the same could be achieved without. Maybe some form of regularization (punishment for more complex neural network) could improve this?
+The results in the second configuration, were much better. The author could hear a clear tone in all 10 output sounds. There was still some noise in most sounds. The author believes that the solutions would have improved with more generations, because the fitness was typically still increasing towards the 500th (last) generation. One of the output sounds featured vibrato (varying pitch over time), due to a noisy input being mapped to the center frequency parameter. This could probably have been alleviated by adding the derivative of the pitch as a dimension in the fitness function, so the unwanted vibrato would be punished more severely by the fitness function.
 
-Show species graph and discuss deaths and emerging species, correlate with fitness jumps.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{exp4_spectrum_plot}
+    \caption{TODO caption TODO refer to this figure}
+    \label{fig:exp4_spectrum_plot}
+\end{figure}
+
+The takeaway from this experiment is that
+\begin{itemize}  
+\item the collection of features used for similarity measures has a high impact on the resul
+\item bark bands are useful
+\end{itemize}
