@@ -56,7 +56,7 @@ The takeaway from this experiment is that
 
 \subsection{Analysis}
 
-In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice.
+In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice, and identify some things that can be improved upon.
 
 In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) don't vary much over time (see figure \ref{fig:exp4_typical_nn_evolution}). Consequently, these three nodes act like a bias node with some noise.
 
@@ -76,6 +76,26 @@ Another interesting fact is that the number of hidden nodes tends to increase ov
     \label{fig:exp4_neural_input}
 \end{figure}
 
-TODO Show neural network. Tell that no hidden nodes are actually needed because the same could be achieved without. Maybe some form of regularization (punishment for more complex neural network) could improve this?
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{exp4_fitness_plot}
+    \caption{Fitness plot}
+    \label{fig:exp4_fitness_plot}
+\end{figure}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{exp4_species_plot}
+    \caption{Species chart with max fitness overlay}
+    \label{fig:exp4_species_plot}
+\end{figure}
+
+\iffalse
 TODO Show species graph and discuss deaths and emerging species, correlate with fitness jumps.
+
+regulated: between minspecies and maxspecies
+each species at a given time has roughly the same amount of individuals
+no obvious correlation between jumps in max fitness and the death of existing species or emergence of new species
+competition happens only within species. species are given time to improve its structure before competition with the rest of the population occurs.
+https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume21/stanley04a-html/node3.html
+\fi
