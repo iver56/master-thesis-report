@@ -3,33 +3,43 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 1}
-In this experiment, the aim is to find a good combination of crossover rate and mutation rate.
+In this experiment, the aim is to find good values for crossover rate and mutation rate.
 
 \subsection{Configuration}
-\begin{minipage}{\linewidth}
-\centering
-\captionof{table}{Table Title TODO} \label{tab:title} 
-\begin{tabular}{ C{3.5in} C{1.6in} }\toprule[1.5pt]
-\bf Parameter & \bf Value \\
+
+\begin{center}
+\begin{longtable}{p{5cm} p{7cm}}
+\caption[Experiment configuration]{Experiment configuration} \label{tab:exp1_configuration} \\
+
+\hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline \hline
+\endlastfoot
+
+Number of generations & 20 \\
 \midrule
-  Number of generations & 20 \\
+Fitness function & Local similarity \\
 \midrule
-  Fitness function & Local similarity \\
+Target sound & Drum loop \\
 \midrule
-  Target sound & Drum loop \\
+Input sound & White noise \\
 \midrule
-  Input sound & White noise \\
+Effect & Distortion and resonant low-pass filter \\
 \midrule
-  Effect & Distortion and resonant low-pass filter \\
+Audio features & mfcc\_0, mfcc\_0\_\_derivative, mfcc\_1 \\
 \midrule
-  Audio features & mfcc\_0, mfcc\_0\_\_derivative, mfcc\_1 \\
-\midrule
-  Number of runs & 250 per configuration \\
-\bottomrule[1.25pt]
-\end {tabular}\par
-\bigskip
-Should be a caption TODO
-\end{minipage}
+Number of runs & 150 per configuration \\
+\end{longtable}
+\end{center}
 
 \subsection{Fitness function}
 The local similarity fitness function is based on the average euclidean distance between the feature vector of the target sound and the output sound in the k frames of the two sounds.
@@ -47,12 +57,12 @@ Function LOCAL_SIMILARITY(target, individual):
 
 where \texttt{EUCLIDEAN\_DISTANCE} is $d(p,q)=\sqrt{(q_1-p_1)^2+(q_2-p_2)+...+(q_n-p_n)^2}$
 
-\subsection{Evaluation of configurations}
-Figure 4.1 TODO shows that ...
+\subsection{Results and evaluation}
+Figure \ref{fig:exp1_heatmap} shows that one should avoid using a high mutation rate and a low crossover rate. Instead, one of the combinations inside the red region should do well. Bear in mind that the differences between pure yellow and lime green are small in this region, and that these small differences are not statistically significant. The variance could be reduced with more runs, but due to computational time, the number of runs per configuration was limited to 150. The yellow spot is probably a good configuration, albeit not necessarily the best. Muration rate = 0.6 and crossover rate = 0.7 are used in the following experiments.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.99\textwidth]{grid_search_crossover_mutation_avg}
-    \caption{TODO caption}
-    \label{fig:grid_search_crossover_mutation_avg}
+    \caption{Heat map with a red region, indicating the best configurations}
+    \label{fig:exp1_heatmap}
 \end{figure}
