@@ -3,14 +3,19 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 2}
-In this experiment, the aim is to find a good value for add link probability et al TODO
+In this experiment, the aim is to find a good value for parameters related to structural mutation:
+
+\begin{itemize}  
+\item Add node probability
+\item Remove simple node probability
+\item Add link probability
+\item Remove link probability
+\end{itemize}
 
 \subsection{Configuration}
 
-
-
 \begin{center}
-\begin{longtable}{p{5cm} p{7cm}}
+\begin{longtable}{p{5cm} p{8.5cm}}
 \caption[Experiment configuration]{Experiment configuration} \label{tab:exp1_configuration} \\
 
 \hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
@@ -43,14 +48,14 @@ Number of runs & 400 per configuration \\
 \end{longtable}
 \end{center}
 
-\subsection{Evaluation of configurations}
-Figure \ref{fig:add_link_probability} TODO shows that 0.03 is probably the best value while 0.3 is significantly worse
+\subsection{Results and evaluation}
+Figure \ref{fig:exp2_add_link_probability} shows that 0.03 is probably the best value while 0.3 is significantly worse. This might mean that the problem at hand is best solved with few or no hidden nodes. An alternative interpretation is that hidden nodes are useful, but that they slow down the search for the ultimate individual, due to increased complexity.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.99\textwidth]{add_link_probability}
-    \caption{TODO caption}
-    \label{fig:add_link_probability}
+    \caption{Comparison of five different values for the structural mutation parameters}
+    \label{fig:exp2_add_link_probability}
 \end{figure}
 
-TODO: Show typical end-result neural networks from all the configurations, to highlight that higher probability builds a larger, more complex network
+% TODO: Show typical end-result neural networks from all the configurations, to highlight that higher probability builds a larger, more complex network
