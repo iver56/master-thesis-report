@@ -11,7 +11,7 @@ As stated in the introduction, current research at the Music Technology departme
 
 While an evolved neural network may perform well on the input sound and target sound it was trained on, it is desirable to be able to try the same neural network on other sounds to see how well it generalizes. In particular, it would be interesting to try it in live music performances. This requires some architectural changes, as audio needs to be analyzed in real time, preferably with low latency.
 
-Picbreeder (Secretan et al., 2008) and Soundbreeder (Ye \& Shen, 2014) had success with HyperNEAT, which is one variant of NEAT that has not been tried in this project. HyperNEAT might be able to produce better results than NEAT in this project, so that’s worth exploring.
+Picbreeder \citep{secretan2008} and Soundbreeder \citep{ye2014} had success with HyperNEAT, which is one variant of NEAT that has not been tried in this project. HyperNEAT might be able to produce better results than NEAT in this project, so that’s worth exploring.
 
 While five different fitness functions have already been developed and compared, the author is fairly certain that further research on this could yield improvements. For example, a (recurrent) neural network that is trained to classify a few classes of sounds could be used for measuring fitness.
 
