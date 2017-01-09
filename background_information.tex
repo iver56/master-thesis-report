@@ -90,9 +90,14 @@ A low-pass filter attenuates high frequencies and retains low frequencies unchan
     \label{fig:low_pass_filter}
 \end{figure}
 
-The amplitude modulation effect multiplies the sound signal with a unipolar sine wave that oscillates between 0 and 1. When the frequency of the sine wave is low (< 20 Hz), one can hear that the amplitude is being brought up and down. With higher frequencies there is instead an effect on the timbre of the sound. The modulator generates a set of frequency sidebands. TODO
+The amplitude modulation effect multiplies the sound signal with a unipolar sine wave that oscillates between 0 and 1. When the frequency of the sine wave is low (< 20 Hz), one can hear that the amplitude is being brought up and down. With higher frequencies there is instead an effect on the timbre of the sound. The modulator then generates a set of frequency sidebands, as illustrated in figure \ref{fig:am_sidebands}
 
-TODO: math formula and image of waveform and frequency spectrum
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{am_sidebands}
+    \caption{TODO caption. 2khz sine wave modulated with a sine 1 kHz modulation wave}
+    \label{fig:am_sidebands}
+\end{figure}
 
 A band-pass filter is a filter that rejects frequencies outside a given range. A bandpass filter has a center frequency and a bandwidth.
 
