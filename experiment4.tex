@@ -24,7 +24,7 @@ Configuration B RMS, pitch, spectral centroid and bark bands
 \midrule
   Input sound & White noise \\
 \midrule
-  Effect & Bandpass filter with up to 10x post gain \\
+  Effect & Band-pass filter with up to 10x post gain \\
 \midrule
   Audio features & \textbf{Configuration A}: RMS, pitch and spectral centroid \newline
   \textbf{Configuration B}: RMS, pitch, spectral centroid and 25 bark bands \\
@@ -37,7 +37,7 @@ Should be a caption TODO
 \end{minipage}
 
 \subsection{Evaluation}
-Since fitness functions were different in these two configurations, the fitness values are not directly comparable. Instead, the results were evaluated by manually listening to the output sounds. In the first configuration, the results were fairly bad: All of the sounds were too noisy, and the author failed to perceive the tone. However, in terms of spectral centroid and amplitude, the sounds were a good match. In order to transform noise into a sine, the bandwidth of the bandpass filter has to be very narrow. A narrow filter would have lowered the overall amplitude of the sound. This would have been deemed bad by the fitness function, hence the genetic algorithm didn't effectively explore that area in the solution space. Also, a narrow filter wouldn't have yielded any improvements in the similarity in spectral centroid and/or pitch. Therefore, the typical solution has a broad bandpass filter, albeit with an appropriate center frequency. See in figure \ref{fig:exp4_spectrum_plot} that the peak frequency of the typical output sound matches well the peak frequency of the target sound.
+Since fitness functions were different in these two configurations, the fitness values are not directly comparable. Instead, the results were evaluated by manually listening to the output sounds. In the first configuration, the results were fairly bad: All of the sounds were too noisy, and the author failed to perceive the tone. However, in terms of spectral centroid and amplitude, the sounds were a good match. In order to transform noise into a sine, the bandwidth of the band-pass filter has to be very narrow. A narrow filter would have lowered the overall amplitude of the sound. This would have been deemed bad by the fitness function, hence the genetic algorithm didn't effectively explore that area in the solution space. Also, a narrow filter wouldn't have yielded any improvements in the similarity in spectral centroid and/or pitch. Therefore, the typical solution has a broad bandpass filter, albeit with an appropriate center frequency. See in figure \ref{fig:exp4_spectrum_plot} that the peak frequency of the typical output sound matches well the peak frequency of the target sound.
 
 The results in the second configuration, were much better. The author could hear a clear tone in all 10 output sounds. There was still some noise in most sounds. The author believes that the solutions would have improved with more generations, because the fitness was typically still increasing towards the 500th (last) generation. One of the output sounds featured vibrato (varying pitch over time), due to a noisy input being mapped to the center frequency parameter. This could probably have been alleviated by adding the derivative of the pitch as a dimension in the fitness function, so the unwanted vibrato would be punished more severely by the fitness function.
 
