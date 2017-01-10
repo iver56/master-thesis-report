@@ -3,67 +3,70 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 5}
-This experiment is about combining several audio effects in serial and parallel. The idea is that this allows for altering the sound in more ways than with only a single audio effect. The hypothesis is that a genetic algorithm could be adept at choosing which effects to use and how. This experiment will study two different effect networks, as illustrated by figure \ref{TODO} and \ref{TODO}. From now on, they will be referred to as ``1 layer'' and ``2 layers'', respectively. In addition, to get an idea of how each effect performs individually, the effects used will be tested separately.
 
-\begin{figure}[h]
+\subsection{Configuration}
+This experiment is about combining several audio effects in serial and parallel. The idea is that this allows for altering the sound in more ways than with only a single audio effect. This may yield improvements in fitness compared to using a single audio effect. The hypothesis is that the genetic algorithm could be adept at choosing what effects to use and how to combine them. This experiment will study two different effect networks, illustrated by figure \ref{fig:exp5_1layer_flow} and \ref{fig:exp5_2layers_flow}. From now on, these two configurations will be referred to as ``1 layer'' and ``2 layers'', respectively. To find out how well these effect networks perform, they will be compared to runs with individual audio effects.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{exp5_1layer_flow}
     \caption{Signal flow in the ``1 layer'' configuration}
     \label{fig:exp5_1layer_flow}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{exp5_2layers_flow}
     \caption{Signal flow in the ``2 layers'' configuration}
     \label{fig:exp5_2layers_flow}
 \end{figure}
 
-For baseline performance measure, each effect has been tested separately. Then they were run in parallel TODO
 
+\subsection{Results and evaluation}
 
-
-In this experiment, we do 5 fx in parallel => ok result
-am
-band-pass
-bitreduce
-dist lpf
-chorus
-
-(Then 2 layers of 5?)
-Then 10 fx in parallel => bad result
-
-Suggest pre-training with each fx separately, then training the mix
-Softmax mixing may also be bad -> suggest independent mix values
-
-create video demonstrating 1st successful result here
-
-Say something about hypothesis about which fx will be used. Which ones were actually used? Do the same for parameters. Show mix values in horizon graph. Say that am and chorus make sound richer, while we need it filtered.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{exp5_1layer_softmax}
-    \caption{Gain values for each effect in the best result with configuration 1 TODO}
-    \label{fig:exp5_1layer_softmax}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{exp5_2layers_softmax}
-    \caption{Gain values for each effect in the best result with configuration 2 TODO}
-    \label{fig:exp5_2layers_softmax}
-\end{figure}
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{exp5_avg}
     \caption{Aggregated fitness values}
     \label{fig:exp5_avg}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{exp5_box}
     \caption{Box-and-whisker plot of fitness values in the last generation}
     \label{fig:exp5_box}
+\end{figure}
+
+As illustrated by figure \ref{fig:exp5_avg} and \ref{fig:exp5_box}, three of the audio effects (amplitude modulation, chorus and bitreduce) get bad scores. The reason is that they are not able to shape/filter the noise in a desirable manner. This makes sense, as these three audio effects typically make the sound ``richer''. The band-pass filter and low-pass filter are more useful in this experiment, because they can filter the wide spectrum of the input sound (white noise) to something that sounds more like the target sound (drums). Hence low mix values for am, chorus and bitreduce are expected in the ``1 layer'' and the ``2 layers'' runs. Indeed, when inspecting the mix values in the best runs, we find that bandpass and dist\_lpf are used much (see figure \ref{fig:exp5_1layer_softmax} and \ref{fig:exp5_2layers_softmax}). However, we also find that chorus and bitreduce are used for representing the snare drum (the rightmost part). In the sound illustrated by \ref{fig:exp5_1layer_softmax} the mix values change rapidly at one point, and this gives the snare drum a flutter-like texture and creates the illusion of a short echo. The waveform of this sound can be seen in figure \ref{fig:exp5_1layer_waveform}.
+
+While the algorithm may have found out which effects are not useful, it has not found out how to use the useful effects in a good way. Note that dist\_lpf alone yields better results than 1 layer. Theoretically, both 1 layer and 2 layers could produce solutions as good as those with dist\_lpf, but that typically does not happen, at least not with the same number of generations.
+
+One key takeaway from this experiment is that one should only use audio effects that are known to be useful in the context of the experiments. Adding unfitting audio effects to an audio effect network makes the search space larger and has a negative impact on the convergence rate.
+
+Here's an idea that could be applied to improve the results of the audio networks: Perform pre-training on the parameters of the various audio effects separately. Then freeze those neural networks and train the mix of the output from the effects when they are used in parallel.
+
+% TODO Softmax mixing may also be bad -> suggest independent mix values
+
+% TODO create video demonstrating 1st successful result here?
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{exp5_1layer_softmax}
+    \caption{Mix values for each effect in the best result from the runs with 1 layer}
+    \label{fig:exp5_1layer_softmax}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{exp5_1layer_waveform}
+    \caption{Waveform of the best output sound from the runs with 1 layer}
+    \label{fig:exp5_1layer_waveform}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{exp5_2layers_softmax}
+    \caption{Mix values for each effect in the best result from the runs with 2 layers}
+    \label{fig:exp5_2layers_softmax}
 \end{figure}
