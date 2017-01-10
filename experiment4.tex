@@ -62,28 +62,28 @@ In this experiment, the effect parameters do not have to be \textit{dynamically}
 
 Another interesting fact is that the number of hidden nodes tends to increase over time, even though these hidden nodes are not needed to get an optimal solution in this experiment. Any constant value can be sent to the output node without having to go through hidden nodes. This is another example of NEAT not finding the optimal solution. Having many hidden nodes hurts evolvability, because an arbitrary mutation on a complex individual is less likely to yield an improvement than the same operation on a simpler individual with fewer hidden nodes. Some form of regularization (punishment for more complex neural networks) could alleviate the problem. Another way to deal with this problem in experiments that do not require hidden nodes is setting AddNodeProbability to zero.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{exp4_typical_nn_evolution}
     \caption{Neural network visualizations}
     \label{fig:exp4_typical_nn_evolution}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{exp4_neural_input}
     \caption{Neural inputs are almost constant}
     \label{fig:exp4_neural_input}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{exp4_fitness_plot}
     \caption{Fitness plot}
     \label{fig:exp4_fitness_plot}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{exp4_species_plot}
     \caption{Species chart with max fitness overlay}
