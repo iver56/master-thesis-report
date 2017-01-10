@@ -3,7 +3,21 @@
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 5}
-This experiment is about combining several effects in serial and parallel. The hypothesis is that a genetic algorithm could be adept at choosing which effects to use and how.
+This experiment is about combining several audio effects in serial and parallel. The idea is that this allows for altering the sound in more ways than with only a single audio effect. The hypothesis is that a genetic algorithm could be adept at choosing which effects to use and how. This experiment will study two different effect networks, as illustrated by figure \ref{TODO} and \ref{TODO}. From now on, they will be referred to as ``1 layer'' and ``2 layers'', respectively. In addition, to get an idea of how each effect performs individually, the effects used will be tested separately.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{exp5_1layer_flow}
+    \caption{Signal flow in the ``1 layer'' configuration}
+    \label{fig:exp5_1layer_flow}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{exp5_2layers_flow}
+    \caption{Signal flow in the ``2 layers'' configuration}
+    \label{fig:exp5_2layers_flow}
+\end{figure}
 
 For baseline performance measure, each effect has been tested separately. Then they were run in parallel TODO
 
