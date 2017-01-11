@@ -30,6 +30,7 @@ Neuroevolution is a technique that uses evolutionary algorithms to train artific
 \section{NeuroEvolution of Augmenting Topologies (NEAT)}
 NEAT \citep{stanley2002} is a neuroevolution technique that evolves neural networks with genetic algorithms. Not only the weights of the ANN are evolved, but also the structure. The NEAT approach begins with a feed-forward approach with input nodes and output nodes that are fully connected. The ANN can then grow larger by having nodes and links added to it. NEAT can also remove nodes and links.
 
+\iffalse
 TODO:
 Competing conventions
 Species
@@ -51,6 +52,7 @@ Elitism
 Tournament selection
 Sexual vs asexual reproduction?
 Mutation operations
+\fi
 
 \section{Multi-Objective evolutionary algorithm}
 As real-life problems often have more than one objective, there is a need for ways to deal with multiple objectives effectively. A multi-objective evolutionary algorithm (MOEA) is an algorithm for solving mathematical optimization problems involving more than one objective function to be optimized simultaneously \citep{veldhuizen2000}. One well-known algorithm of this kind is Nondominated Sorting Genetic Algorithm II (NSGA-II) \citep{nsga2}. In this algorithm, the performance measure is based primarily on rank and secondarily on crowding distance. Rank is calculated by running the fast non-dominated sort algorithm. This algorithms assigns a rank to each individual. If the rank of individual A is better than the rank of another individual B, it means that A dominates B. Individual A dominates B if both the following conditions are true:
@@ -94,8 +96,6 @@ A low-pass filter attenuates high frequencies and retains low frequencies unchan
 
 \subsection{Band-pass filter}
 A band-pass filter rejects frequencies outside a given range \citep{dodge_jerse_1997}. This filter has two parameters. Center frequency (denoted by $f_0$ in figure \ref{fig:bandpass}) defines the center of the frequency range. Bandwidth (denoted by $B$ in figure \ref{fig:bandpass}) defines how broad or narrow the frequency range is.
-
-TODO cite
 
 \begin{figure}[H]
     \centering
