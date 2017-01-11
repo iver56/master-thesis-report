@@ -138,7 +138,98 @@ The chorus effect delays the input signal by a short \textit{delay time} (usuall
 \section{Audio processing tools}
 Audio processing is the alteration of audio signals, typically through audio effects. One popular audio processing tool is Csound \citep{csound}. This is both an audio programming language and a program that runs Csound code. The Csound program takes in a text file of code. This code is executed by the Csound program. The output is sound that is directed to either an audio interface (live) or to a file (non-real-time processing). Csound is used by musicians and composers, typically in experimental electroacoustic music. Traditionally, it has been an offline tool, due to lack of computational power. Today, computational power is sufficient for Csound to run in real-time, so it can be used in live settings such as concerts and sound installations. Csound can not only run on desktop computers, but can also be used as audio processing engine in mobile applications for the operating systems Android and iOS.
 
-\section{Preliminary research}
+\section{Specialization project}
 This master's thesis is a continuation of the author's specialization project. The preliminary experiments in the specialization project were found to be successful. This led to a published paper in the proceedings of the 2nd AES Workshop on Intelligent Music Production\footnote{\url{http://www.aes-uk.org/forthcoming-meetings/wimp2/\#proceedings}}. This paper is included in appendix \ref{appendix:jordal_paper}. The author also presented his findings in a 15-minute talk at this event.
 
-%The following subsections will summarize some of the main findings from the experiments in the specialization project.
+The following subsections will summarize some of the main areas of study in the experiments in the specialization project.
+
+\subsection{Output activation functions}
+Three different output activation functions (used in the output nodes of the neural networks) were compared. Sigmoid was found to be better than linear and sine in most cases (see figure \ref{fig:output_activation_functions_avg}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{output_activation_functions_avg}
+    \caption{Average fitness over 20 runs. Three different output activation functions are compared.}
+    \label{fig:output_activation_functions_avg}
+\end{figure}
+
+\subsection{Fitness functions}
+Five fitness functions were compared. Figure \ref{fig:fitness_functions_avg} shows how well they scored on average on the similarity measure (local similarity).
+
+\subsubsection{Local similarity}
+The local similarity fitness function is based on the average euclidean distance between the feature vector of the target sound and the output sound in the k frames of the two sounds.
+
+\begin{verbatim}
+Function LOCAL_SIMILARITY(target, individual):
+    total_euclidean_distance = 0
+    for each k in range(num_frames):
+        A = target.get_feature_vector(k)
+        C = individual.get_feature_vector(k)
+        total_euclidean_distance += EUCLIDEAN_DISTANCE(A, C)
+    avg_euclidean_distance = total_euclidean_distance / num_frames
+    return 1 / (1 + avg_euclidean distance)
+\end{verbatim}
+
+where \texttt{EUCLIDEAN\_DISTANCE} is $d(p,q)=\sqrt{(q_1-p_1)^2+(q_2-p_2)+...+(q_n-p_n)^2}$
+
+\subsubsection{Multi-objective optimization}
+This fitness function is inspired by NSGA-II \citep{nsga2}. It incorporates two measures: rank and crowding distance. These are concepts taken directly from the NSGA-II paper, and they are then used in a math expression that satisfies these two constraints that are used in NSGA-II:
+
+\begin{itemize}
+\item $\text{rank}(A) > \text{rank}(B) \implies \text{fitness}(A) > \text{fitness}(B)$
+\item $\text{rank}(A) = \text{rank}(B), \text{CD}(A) > \text{CD}(B) \implies \text{fitness}(A) > \text{fitness}(B)$
+\\ where CD stands for crowding distance
+\end{itemize}
+
+The ranks of the individual are calculated by doing non-dominated sort. Crowding distance is computed between individuals in a given rank. The multi objective fitness function works like this:
+
+\begin{Verbatim}[fontsize=\small]
+Function MULTI_OBJECTIVE(target, individuals):
+    for individual in individuals:
+        CALCULATE_OBJECTIVES(individual, target)
+    fronts = FAST_NON_DOMINATED_SORT(individuals)
+    for rank in fronts:
+        CALCULATE_CROWDING_DISTANCE(fronts[rank])  # assigns individual.crowding_distance
+        for individual in fronts[rank]:
+            individual.fitness = 1.0 / (rank + (0.5 / (1.0 + individual.crowding_distance)))
+
+Function CALCULATE_OBJECTIVES(individual, target):
+    individual.objectives = {}
+    for feature in similarity_features:
+        individual.objectives[feature] = EUCLIDEAN_DISTANCE(
+                                             target.analysis[feature],
+                                             output.analysis[feature])
+\end{Verbatim}
+
+Pseudocode for \texttt{FAST\_NON\_DOMINATED\_SORT} and \texttt{CALCULATE\_CROWDING\_DISTANCE} can be found in the NSGA-II paper \citep{nsga2}.
+
+\subsubsection{Hybrid}
+While NSGA-II is good at optimizing for non-dominated individuals, these individuals may be extreme tradeoffs and therefore not necessarily feasible solutions in practice. In order to reward good tradeoffs more, the author developed the hybrid fitness function. This fitness function returns the average of \texttt{MULTI\_OBJECTIVE} and \texttt{LOCAL\_SIMILARITY}.
+
+\subsubsection{Novelty search}
+Novelty search \citep{lehman2008} ignores the objective and optimizes for novelty instead. The reason that this may work well is that in some problems the intermediate steps to the goal do not resemble the goal itself. When it comes to implementation, MultiNEAT has novelty search built-in, but Python bindings for it are missing, so the author could not use it in his Python application. However, novelty search can be implemented on top of most evolutionary algorithms, by using a fitness function that rewards novelty \citep{noveltysearchwebsite}, so that is what the author did. First, each individual needs to be represented as a vector that describes its characteristics. This vector is constructed by concatenating all audio feature series of the individual. The implemented fitness function assigns high fitness values to the individuals that have long euclidean distances from the 3 nearest neighbours, where the neighbours are individuals that have been evaluated earlier. The very first population gets random fitness values, because there are no earlier individuals to measure distance from.
+
+\subsubsection{Mixed}
+This fitness function is simple: For each generation, one of the following fitness functions is chosen randomly and applied: local similarity, multi-objective, hybrid, novelty. The idea behind this fitness function is to create a dynamic fitness landscape, where the individuals that get good scores from all fitness functions have the greatest chance of survival over time.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fitness_functions_avg}
+    \caption{Best individual on average over 20 runs, with 20 generations for each run}
+    \label{fig:fitness_functions_avg}
+\end{figure}
+
+\subsection{Automatic feature selection}
+When dealing with high-dimensional input data, the number of weights in a fully connected neural network becomes quite large. Clean and useful combinations of all the input signals can be hard to evolve. To deal with this situation, one can use Feature Selective NeuroEvolution of Augmenting Topologies (FS-NEAT) \citep{whiteson2005}. This NEAT variation starts with just a few connections and gradually adds/removes connections.
+
+In an experiment with noise for input sound and a sine sweep for output sound, FS-NEAT was found to perform better than classic NEAT. This experiment had 68 audio features as input. Classic NEAT would typically evolve a very noisy parameter control, so the output sounds became glitchy and not very musically interesting. FS-NEAT has been found to deal with the high-dimensional input more effectively, as it selected only a few of the audio features that were useful for getting high fitness values. Figure \ref{fig:neat_vs_fs_neat_avg_max} shows fitness values with NEAT and FS-NEAT in the described experiment.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{neat_vs_fs_neat_avg_max}
+    \caption{Fitness values in runs with NEAT and FS-NEAT, aggregated from 20 runs with each configuration.}
+    \label{fig:neat_vs_fs_neat_avg_max}
+\end{figure}
+
+
+
