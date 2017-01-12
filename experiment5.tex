@@ -82,11 +82,15 @@ As illustrated by figure \ref{fig:exp5_avg} and \ref{fig:exp5_box}, three of the
 
 While the algorithm may have found out which effects are not useful, it has not found out how to use the useful effects in a good way. Note that dist\_lpf alone yields better results than 1 layer. Theoretically, both 1 layer and 2 layers could produce solutions as good as those with dist\_lpf, but that typically does not happen, at least not with the same number of generations.
 
-One key takeaway from this experiment is that one should only use audio effects that are known to be useful in the context of the experiments. Adding unfitting audio effects to an audio effect network makes the search space larger and has a negative impact on the convergence rate.
+One key takeaway from this experiment is that one should only use audio effects that are known to be useful in the context of the experiments. Adding unfitting audio effects to an audio effect network makes the search space larger and has a negative impact on the convergence rate. In other words, to get good results with effect networks, let a human expert create the audio effect structure.
 
-Here's an idea that could be applied to improve the results of the audio networks: Perform pre-training on the parameters of the various audio effects separately. Then freeze those neural networks and train the mix of the output from the effects when they are used in parallel.
+Here are some ideas that could be applied to improve the results of audio effect networks:
 
-% TODO Softmax mixing may also be bad -> suggest independent mix values
+\begin{itemize}
+\item Perform pre-training on the parameters of the various audio effects separately. Then freeze those neural networks and train the mix of the output from the effects when they are used in parallel.
+\item The assumptions behind softmax mix values might be suboptimal. Using independent mix values, i.e. without any normalization, might yield better results.
+\item Use Cartesian Genetic Programming (CGP) to automatically evolve networks of interconnected audio effects.
+\end{itemize}
 
 % TODO create video demonstrating 1st successful result here?
 
