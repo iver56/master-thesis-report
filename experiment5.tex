@@ -7,6 +7,12 @@
 \subsection{Configuration}
 This experiment is about combining several audio effects in serial and parallel. The idea is that this allows for altering the sound in more ways than with only a single audio effect. This may yield improvements in fitness compared to using a single audio effect. The hypothesis is that the genetic algorithm could be adept at choosing what effects to use and how to combine them. This experiment will study two different effect networks, illustrated by figure \ref{fig:exp5_1layer_flow} and \ref{fig:exp5_2layers_flow}. From now on, these two configurations will be referred to as ``1 layer'' and ``2 layers'', respectively. To find out how well these effect networks perform, they will be compared to runs with individual audio effects.
 
+The effect mix values in one layer are determined by the output of the softmax function \eqref{eq:softmax}, also called the normalized exponential function. This makes the sum of effect mixes in one layer equal to one. It also lets the neural network easily ``choose'' one single audio effect to dominate at any given time, but mixing multiple audio effects is also within reach.
+
+\begin{equation} \label{eq:softmax}
+softmax_i(a)=\frac{\exp{a_i}}{\sum\exp{a_i}}
+\end{equation}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{exp5_1layer_flow}
