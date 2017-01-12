@@ -77,7 +77,7 @@ Modified hyperbolic tangent is a waveshaping function that can model the charact
 
 $$\text{mtanh}(x)=\frac{e^{ax}-e^{-bx}}{e^{cx}+e^{-dx}}$$
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{04_modified_hyperbolic_tangent_waveform_and_spectrum}
     \caption{Harmonic frequency components are added to a 440 Hz sine wave by means of waveshaping}
@@ -107,7 +107,7 @@ A band-pass filter rejects frequencies outside a given range \citep{dodge_jerse_
 \subsection{Amplitude modulation}
 The amplitude modulation effect multiplies the sound signal with a unipolar sine wave that oscillates between 0 and 1. When the frequency of the sine wave is low (\textless~20 Hz), one can hear that the amplitude is being brought up and down, as in tremolo \citep{serafin2007}. With higher frequencies there is instead an effect on the timbre of the sound. The modulator generates a set of frequency sidebands, as illustrated in figure \ref{fig:am_sidebands}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{am_sidebands}
     \caption{Frequency spectrum plot of a 2 kHz sine wave modulated with a 1 kHz unipolar sine wave}
@@ -117,7 +117,7 @@ The amplitude modulation effect multiplies the sound signal with a unipolar sine
 \subsection{Bit reduction}
 The bit reduction effect reduces the number of bits used to represent a sample \citep{bitreduction}. Each sample amplitude value is rounded to a number of discrete steps. This introduces a particular kind of distortion, also called quantization noise.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{bit_reduction}
     \caption{A high fidelity sine wave quantized to 3 bits per sample. \textit{By Hyacinth, CC BY-SA 3.0, \url{https://commons.wikimedia.org/w/index.php?curid=30716342}}}
@@ -127,7 +127,7 @@ The bit reduction effect reduces the number of bits used to represent a sample \
 \subsection{Chorus}
 The chorus effect delays the input signal by a short \textit{delay time} (usually in the range 20-50~ms) and mixes it with the dry input signal \citep{chorus}. The \textit{delay time} is variable and usually controlled by a Low-Frequency Oscillator (LFO), as illustrated by figure \ref{fig:chorus}. This may create an impression of multiple voices playing or singing the same thing.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{chorus}
     \caption{Signal flow in a chorus effect}
