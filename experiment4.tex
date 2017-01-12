@@ -65,9 +65,14 @@ The takeaway from this experiment is that
 
 In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice, and identify some things that can be improved upon.
 
-In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) do not vary much over time (see figure \ref{fig:exp4_typical_nn_evolution}). Consequently, these three nodes act like a bias node with some noise.
+In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) do not vary much over time (see figure \ref{fig:exp4_neural_input}). Consequently, these three nodes act like a bias node with some noise.
 
-Another interesting fact is that the number of hidden nodes tends to increase over time, even though these hidden nodes are not needed to get an optimal solution in this experiment. Any constant value can be sent to the output node without having to go through hidden nodes. This is another example of NEAT not finding the optimal solution. Having many hidden nodes hurts evolvability, because an arbitrary mutation on a complex individual is less likely to yield an improvement than the same operation on a simpler individual with fewer hidden nodes. Some form of regularization (punishment for more complex neural networks) could alleviate the problem. Another way to deal with this problem in experiments that do not require hidden nodes is setting AddNodeProbability to zero.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{exp4_neural_input}
+    \caption{Neural inputs are almost constant}
+    \label{fig:exp4_neural_input}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -76,12 +81,7 @@ Another interesting fact is that the number of hidden nodes tends to increase ov
     \label{fig:exp4_typical_nn_evolution}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{exp4_neural_input}
-    \caption{Neural inputs are almost constant}
-    \label{fig:exp4_neural_input}
-\end{figure}
+Another interesting fact is that the number of hidden nodes in the best individual tends to increase over the generations, even though these hidden nodes are not needed to get an optimal solution in this experiment. Any constant value can be sent to the output node without having to go through hidden nodes. This is another example of NEAT not finding the optimal solution. Having many hidden nodes hurts evolvability, because an arbitrary mutation on a complex individual is less likely to yield an improvement than the same operation on a simpler individual with fewer hidden nodes. Some form of regularization (punishment for more complex neural networks) could alleviate the problem. Another way to deal with this problem in experiments that do not require hidden nodes is setting AddNodeProbability to zero.
 
 \begin{figure}[H]
     \centering
@@ -97,12 +97,4 @@ Another interesting fact is that the number of hidden nodes tends to increase ov
     \label{fig:exp4_species_plot}
 \end{figure}
 
-\iffalse
-TODO Show species graph and discuss deaths and emerging species, correlate with fitness jumps.
-
-regulated: between minspecies and maxspecies
-each species at a given time has roughly the same amount of individuals
-no obvious correlation between jumps in max fitness and the death of existing species or emergence of new species
-competition happens only within species. species are given time to improve its structure before competition with the rest of the population occurs.
-https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume21/stanley04a-html/node3.html
-\fi
+A total of 54 different species were created during the 500 generations of neuroevolution (see figure \ref{fig:exp4_species_plot}). There is no obvious correlation between jumps in max fitness and the death of existing species or the emergence of new species. This makes sense, as competition happens only within species, and species are given time to improve their structure before competition with the rest of the population occurs. The figure also illustrates that the number of species in any given generation is well regulated. The concept of dynamic compatibility threshold in NEAT strives to ensure that the number of species stays within bounds \citep{stanley2004}.
