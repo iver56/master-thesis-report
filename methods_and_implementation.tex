@@ -2,10 +2,10 @@
 %!TEX root = thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
-\chapter{Methods and implementation}
+\chapter{Methods and Implementation}
 \label{chapter:methods_and_implementation}
 
-\section{Evolving neural networks}
+\section{Evolving Neural Networks}
 There are several ways to map sound analysis to effect parameters. The initial idea was a modulation matrix, where each effect parameter becomes a linear combination of the audio features. This idea was quickly iterated upon. Why not use an artificial neural network? An artificial neural network can do the same as a modulation matrix (when the ANN has linear activation functions and no hidden layers), but it can also do more. A neural network can have hidden nodes with various activation functions, which makes more complex signal interactions possible. This widens the scope, and allows for learning higher-level features, such as “the snare and the bass drum are hit simultaneously”.
 
 NEAT \citep{stanley2002} is suggested as a technique for evolving neural networks. This is a technique which evolves not only the weights of the neural network, but also the topology, i.e. the number of nodes and the connections between the nodes. HyperNEAT, a technique that is based on NEAT, has been used with great success in a project called Picbreeder \citep{secretan2008} and later with some success in a project called SoundBreeder \citep{ye2014}. The purpose of those projects were to evolve visually and aurally appealing art, respectively. Since both those two projects and this project are within the field of creative computation, the hypothesis is that NEAT or HyperNEAT will work well in this project.
@@ -28,7 +28,7 @@ A. Eldhuset has previously implemented a program that uses Csound in signal inte
 
 Incorporating all these techniques, the author's implementation spends around 0.11 seconds on average per individual, given that the dist\_lpf effect and the aubio mfcc analyzer is used, the duration of the input sound is 7 seconds, and that the program is run on a modern, high-end laptop with two CPU cores. Hence an experiment with population size 20 and 20 generations may take approximately half a minute. If the input sound is shorter, the experiment will run even faster. This is exploited in Experiment 1, where over a million individuals are processed, so fast performance is really useful.
 
-\subsection{Neuroevolution routine}
+\subsection{Neuroevolution Routine}
 The neuroevolution program is called from the command line, with a number of arguments for configuring the experiment. The program then performs roughly these steps:
 
 \begin{enumerate}  
@@ -58,23 +58,23 @@ The evaluation of an individual involves several operations:
     \label{fig:individual_evaluation_process}
 \end{figure}
 
-\subsection{Input standardization}
+\subsection{Input Standardization}
 To make the audio features suitable as input to a neural network, they need to be scaled. A simple, but good technique is to standardize them by is subtracting the mean and dividing by the standard deviation \citep{sarle2014}. For each audio feature there is one sequence of numbers for the input sound and another sequence for the target sound. The mean and standard deviation for an audio feature is calculated from the input sound’s sequence for that feature concatenated with the target sound’s sequence for that feature. This mean and standard deviation is then used in all further input standardization. This gives the series the quality of being centered around zero and having a standard deviation of 1 with respect to the input sound and the target sound. Additionally, to avoid extreme values, values are clipped to the range [-4, 4].
 
-\subsection{Parameter mapping}
+\subsection{Parameter Mapping}
 The output of the neural network is in the range [0, 1], due to the sigmoid activation function in the output layer. These normalized values need to be scaled and skewed appropriately for each effect parameter. The author has used the same mapping function as in Cabbage \citep{walsh2008}, a GUI framework for Csound, where slider values are mapped from 0 to 1 to the target range by the following function:
 
 $$f(x)=m_{min}+(m_{max}-m_{min})*e^{\log(x)/s}$$
 
 Where $m_{min}$ and $m_{max}$ are the endpoints of the target range and s is the skew factor. The default skew factor is 1, which will yield a linear mapping. A skew factor of 0.5 will cause the mapping function to output values in an exponential fashion. This is useful for effect parameters such as cutoff frequency.
 
-\section{Audio effects}
+\subsection{Audio Effects}
 In the toolkit, audio effects are included as text files containing Csound code. Each effect also has a corresponding file that lists the parameters of the effect and their range. This makes it easy to add new Csound effects to the toolkit. The toolkit uses a templating system for generating Csound files, and this makes it possible to combine several audio effects into one larger audio effect with one or more layer of parallel audio effects, as tested in experiment 5.
 
-\section{Data augmentation}
+\subsection{Data Augmentation}
 Data augmentation is implemented as a python module that takes in a sound and creates a Csound file that repeats the sound multiple times with some variations and outputs the resulting audio to a new file. Each repetition of the sound has a unique combination of gain and playback speed. Other ways to augment sound, such as adding reverb or distortion, can be easily implemented.
 
-\section{Live mode}
+\subsection{Live Mode}
 The toolkit includes a python module that can create a Csound file from an individual in an experiment. This Csound file includes an audio analyzer and a neural network that can run on live audio streams, so it can be used in live performances. It can also run in offline mode, to speed up computation when live mode is not needed. This is used in experiment 3 to apply evolved cross-adaptive audio effects to unseen data (i.e. sounds that were not used during training).
 
 \section{Visualization}
