@@ -25,7 +25,7 @@ A. Eldhuset has previously implemented a program that uses Csound in signal inte
 \item Sensible handling of duplicate individuals: when two or more individuals are equal (i.e. their neural networks are equal), evaluate only one of them, and apply the same result to the identical individuals
 \end{itemize}
 
-Incorporating all these techniques, the author's implementation spends around 0.11 seconds on average per individual, given that the dist\_lpf effect and the aubio mfcc analyzer is used, the duration of the input sound is 7 seconds, and that the program is run on a modern, high-end laptop with two CPU cores. Hence an experiment with population size 20 and 20 generations may take approximately half a minute. If the input sound is shorter, the experiment will run even faster. This is exploited in Experiment 2, which generated over a million sounds in total, so fast performance was beneficial.
+Incorporating all these techniques, the author's implementation spends around 0.11 seconds on average per individual, given that the dist\_lpf effect and the aubio mfcc analyzer is used, the duration of the input sound is 7 seconds, and that the program is run on a modern, high-end laptop with two CPU cores. Hence an experiment with population size 20 and 20 generations may take approximately half a minute. If the input sound is shorter, the experiment will run even faster. This is exploited in Experiment 1, where over a million individuals are processed, so fast performance is really useful.
 
 \subsection{Neuroevolution routine}
 The neuroevolution program is called from the command line, with a number of arguments for configuring the experiment. The program then performs roughly these steps:
