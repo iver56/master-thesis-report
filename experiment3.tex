@@ -1,12 +1,67 @@
+
 % !TEX encoding = UTF-8 Unicode
 %!TEX root = thesis.tex
 % !TEX spellcheck = en-US
 %%=========================================
 \section{Experiment 3}
-In this experiment, the aim is to confirm that data augmentation can help generalization
+When using an evolved cross-adaptive audio effect in a live performance, a performer may want to use it in an expressive way. For example, if the performer is a drummer, he can vary the intensity of the drum hits. For the cross-adaptive audio effect to handle this, it needs to be trained on all the different intensities of the drum hits. If an extensive recording is available, that is fine. However, if the available target sound is short or lacks sufficient variation, one can harness the concept of data augmentation to create artificial variations of that sound. If one uses that sound instead, the evolved effect will typically be more capable of dealing with the generated variations. This experiment is about testing the author's implementation of data augmentation and the ability to apply evolved cross-adaptive audio effects to unseen sounds.
+
+% TODO: mention the sounds and how augmented
 
 \subsection{Configuration}
-Input sounds: TODO
 
-\subsection{TODO}
-TODO
+\begin{center}
+\begin{longtable}{p{5cm} p{7cm}}
+\caption[Experiment configuration]{Experiment configuration} \label{tab:exp3_configuration} \\
+
+\hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
+\endfirsthead
+
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
+\endhead
+
+\hline \multicolumn{2}{r}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline \hline
+\endlastfoot
+
+Number of generations & 20 \\
+\midrule
+Target sound (training) & Drum loop with bass drum, snare drum, clap and hihat (figure \ref{fig:exp3_waveforms}) \\
+\midrule
+Target sound (validation) & Snare roll (rapid snare drum hits) with ascending pitch and amplitude (figure \ref{fig:exp3_waveforms}) \\
+\midrule
+Input sound & White noise \\
+\midrule
+Effect & Distortion and resonant low-pass filter \\
+\midrule
+Audio features & Root Mean Square (RMS) and spectral centroid \\
+\midrule
+Number of runs & 40 per configuration \\
+\end{longtable}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{exp3_waveforms}
+    \caption{Waveform of training sound (top) and validation sound (bottom)}
+    \label{fig:exp3_waveforms}
+\end{figure}
+
+The augmented variant of the training sound was created by repeating the sound 8 times, with variations in playback speed and gain for each repetition. The playback speed and gain are sampled from a gaussian distribution centered around $1$ and with standard deviations of $0.3$ and $0.5$, respectively.
+
+
+\subsection{Results and evaluation}
+Figure \ref{fig:exp3_fitness_box} shows that neural networks trained on an augmented variant of the training sound generalizes better than the raw training sound.
+
+% Helps in live settings which typically play in more nuanced ways than the sounds the network is pre-trained on
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{exp3_fitness_box}
+    \caption{Box plot of validation fitness values in final generation. The labels on the x-axis indicate which sound was used as target sound.}
+    \label{fig:exp3_fitness_box}
+\end{figure}
