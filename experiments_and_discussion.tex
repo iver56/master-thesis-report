@@ -30,14 +30,16 @@ Four experiments have been conducted in an attempt to find good ways to use neur
 \midrule
   2 & Find a good value for structural mutation parameters \\
 \midrule
-  3 & Compare sets of audio features used in the fitness function. Analyze data from the neuroevolution process. \\
+  3 & Apply data augmentation to the target sound, and see if the result generalizes better \\
 \midrule
-  4 & Compare networks of audio effects with individual audio effects. \\
+  4 & Compare sets of audio features used in the fitness function. Analyze data from the neuroevolution process. \\
+\midrule
+  5 & Compare networks of audio effects with individual audio effects. \\
 \end{longtable}
 \end{center}
 
 \section{General Configuration}
-Table \ref{tab:general_configuration} shows the parameters used unless otherwise stated in individual experiments
+Table \ref{tab:general_configuration} shows the parameters used unless otherwise stated in individual experiments. However, this table is not exhaustive. A number of NEAT parameters were left at the default values\footnote{\url{https://github.com/peter-ch/MultiNEAT/blob/master/src/Parameters.cpp\#L42}}, set by \citeauthor{multineat}, the authors of MultiNEAT.
 
 \begin{center}
 \begin{longtable}{p{10cm} p{4cm}}
