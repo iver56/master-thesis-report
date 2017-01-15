@@ -5,8 +5,6 @@
 \section{Experiment 3}
 When using an evolved cross-adaptive audio effect in a live performance, a performer may want to use it in an expressive way. For example, if the performer is a drummer, he can vary the intensity of the drum hits. For the cross-adaptive audio effect to handle this, it needs to be trained on all the different intensities of the drum hits. If an extensive recording is available, that is fine. However, if the available target sound is short or lacks sufficient variation, one can harness the concept of data augmentation to create artificial variations of that sound. If one uses that sound instead, the evolved effect will typically be more capable of dealing with the generated variations. This experiment is about testing the author's implementation of data augmentation and the ability to apply evolved cross-adaptive audio effects to unseen sounds.
 
-% TODO: mention the sounds and how augmented
-
 \subsection{Configuration}
 
 \begin{center}
@@ -52,13 +50,12 @@ Number of runs & 40 per configuration \\
 
 The augmented variant of the training sound was created by repeating the sound 8 times, with variations in playback speed and gain for each repetition. The playback speed and gain are sampled from a gaussian distribution centered around $1$ and with standard deviations of $0.3$ and $0.5$, respectively.
 
-%TODO: mention exponential thingy
+Runs with three different target sounds (training sound, augmented training sound and validation sound) will be compared. The resulting effects are applied to the validation sound, and fitness values are measured. The neural networks trained on the validation sound are of course expected to be yield the highest fitness scores when tested on the validation sound. That configuration is included for comparison, as an upper bound estimate.
 
+%TODO: mention exponential thingy (log-normal distribution)
 
 \subsection{Results and Evaluation}
-Figure \ref{fig:exp3_fitness_box} shows that neural networks trained on an augmented variant of the training sound generalizes better than the raw training sound.
-
-% Helps in live settings which typically play in more nuanced ways than the sounds the network is pre-trained on
+Figure \ref{fig:exp3_fitness_box} shows that neural networks trained on an augmented variant of the training sound generalize better than neural networks trained on the nonaugmented training sound. In other words, the resulting audio effects becomes better at dealing with nuances of the situations in the training sound. There's a trade-off, however: Training on an augmented sound requires more computational time because there's more data to process. This may not be a problem, because training can be done before live performance starts.
 
 \begin{figure}[H]
     \centering
