@@ -1,0 +1,5 @@
+Because of the open source nature of the project, the source code can be obtained on GitHub:
+https://github.com/iver56/cross-adaptive-audio
+
+A website with example sounds and a visualization interface demo video is available here:
+http://iver56.github.io/cross-adaptive-audio/
