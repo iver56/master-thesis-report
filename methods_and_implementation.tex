@@ -80,35 +80,43 @@ The toolkit includes a python module that can create a Csound file from an indiv
 \section{Visualization}
 In very early versions of the neuroevolution program, the author found it hard to evaluate all the data produced during experiments. Therefore an interactive web application for visualizing results was developed. This tool has been very important for being able to understand the strengths and weaknesses of the neuroevolution program during development and research. When the author gained a good understanding of the inner workings and the output of the neuroevolution program, he was able to improve the weak points of the implementation.
 
-The visualization system is a single-page web application written in AngularJS, with various JavaScript libraries for visualizing data. For a complete list of JavaScript libraries that were used in the web application, see appendix \ref{appendix:javascript_dependencies}. The application server is written in NodeJS. The neuroevolution program writes data after each generation, and the NodeJS server listens for these data updates. Whenever new data is available, the updated data is sent via WebSockets to the web application, which then updates its views. Figure \ref{fig:viz_fitness_plot}, \ref{fig:viz_species_plot}, \ref{fig:viz_fitness_histogram} and \ref{fig:viz_individual} show partial screenshots the web application.
+The visualization system is a single-page web application written in AngularJS, with various JavaScript libraries for visualizing data. For a complete list of JavaScript libraries that were used in the web application, see appendix \ref{appendix:javascript_dependencies}. The application server is written in NodeJS. The neuroevolution program writes data after each generation, and the NodeJS server listens for these data updates. Whenever new data is available, the updated data is sent via WebSockets to the web application, which then updates its views. The four following figures are screenshots of the web application. Figure \ref{fig:viz_fitness_plot} shows a line chart that visualizes the progress of the GA over the generations. Figure \ref{fig:viz_species_plot} shows a stacked area chart that visualizes the number of individual in each NEAT species over the generations. The fitness histogram in figure \ref{fig:viz_fitness_histogram} visualizes the fitness distribution in the population of the generation selected by the interactive slider.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{viz_fitness_plot}
-    \caption{Fitness plot (line chart, shows the progress of the GA over the generations)}
+    \caption{Fitness plot}
     \label{fig:viz_fitness_plot}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{viz_species_plot}
-    \caption{Species plot (stacked area chart, shows the number of individual in each species over the generations)}
+    \caption{Species plot}
     \label{fig:viz_species_plot}
 \end{figure}
 
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{viz_fitness_histogram}
-    \caption{The fitness histogram shows fitness distribution in the population of the generation selected by the interactive slider}
+    \caption{Fitness histogram for the selected generation}
     \label{fig:viz_fitness_histogram}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{viz_individual}
-    \caption{A: The interactive slider is for selecting a specific individual in the population of the selected generation. B: Neural network visualization with edge colors according to weight. Light color means small magnitude while strong color means large magnitude. Red means positive weight while blue means negative. C: Select which sound and corresponding data series to visualize. D: Audio player with waveform visualization. Useful for playing back the output sound of the selected individual. E and F: Horizon charts for visualizing neural input and neural output, respectively. Horizon charts make better use of vertical space than standard area charts, allowing one to see many more metrics at-a-glance. Larger values are overplotted in successively darker colors, while negative values are offset to descend from the top. When hovering over these charts with the mouse pointer, series labels disappear and a rule with values at the hovered time step is shown. The horizon charts are aligned with the audio player. G: Shows the effect(s) and its parameters. While playing the audio, the knob positions are animated according to the way they were controlled in order to produce the output sound.}
+    \includegraphics[width=0.88\textwidth]{viz_individual}
+    \caption{Visualization of data about an individual}
     \label{fig:viz_individual}
 \end{figure}
 
+Figure \ref{fig:viz_individual} shows various data visualizations related to the individual selected by the interactive slider. Here are brief explanations of the different parts:
+\begin{itemize}
+\item A: The interactive slider is for selecting a specific individual in the population of the selected generation.
+\item B: Neural network visualization with edge colors according to weight. Light color means small magnitude while strong color means large magnitude. Red means positive weight while blue means negative.
+\item C: Select which sound and corresponding data series to visualize.
+\item D: Audio player with waveform visualization. Useful for playing back the output sound of the selected individual.
+\item E and F: Horizon charts for visualizing neural input and neural output, respectively. Horizon charts make better use of vertical space than standard area charts, allowing one to see many more metrics at-a-glance. Larger values are overplotted in successively darker colors, while negative values are offset to descend from the top. When hovering over these charts with the mouse pointer, series labels disappear and a rule with values at the hovered time step is shown. The horizon charts are aligned with the audio player.
+\item G: Shows the effect(s) and its parameters. While playing the audio, the knob positions are animated according to the way they were controlled in order to produce the output sound.
+\end{itemize}
 
