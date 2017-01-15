@@ -65,12 +65,12 @@ The takeaway from this experiment is that
 
 In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice, and identify some things that can be improved upon.
 
-In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) do not vary much over time (see figure \ref{fig:exp4_neural_input}). Consequently, these three nodes act like a bias node with some noise.
+In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) do not vary much over time (see the horizon chart in figure \ref{fig:exp4_neural_input}). Consequently, these three nodes act like a bias node with some noise.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{exp4_neural_input}
-    \caption{Neural inputs are almost constant}
+    \caption{Horizon chart visualizing the three neural inputs over time}
     \label{fig:exp4_neural_input}
 \end{figure}
 
