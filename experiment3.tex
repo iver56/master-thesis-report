@@ -48,11 +48,9 @@ Number of runs & 40 per configuration \\
     \label{fig:exp3_waveforms}
 \end{figure}
 
-The augmented variant of the training sound was created by repeating the sound 8 times, with variations in playback speed and gain for each repetition. The playback speed and gain are sampled from a gaussian distribution centered around $1$ and with standard deviations of $0.3$ and $0.5$, respectively.
+The augmented variant of the training sound was created by repeating the sound 8 times, with variations in playback speed and gain for each repetition. The playback speed and gain are obtained by sampling from a gaussian distribution with standard deviations of $0.3$ and $0.5$, respectively.
 
 Runs with three different target sounds (training sound, augmented training sound and validation sound) will be compared. The resulting effects are applied to the validation sound, and fitness values are measured. The neural networks trained on the validation sound are of course expected to be yield the highest fitness scores when tested on the validation sound. That configuration is included for comparison, as an upper bound estimate.
-
-%TODO: mention exponential thingy (log-normal distribution)
 
 \subsection{Results and Evaluation}
 Figure \ref{fig:exp3_fitness_box} shows that neural networks trained on an augmented variant of the training sound generalize better than neural networks trained on the nonaugmented training sound. In other words, the resulting audio effects becomes better at dealing with nuances of the situations in the training sound. There's a trade-off, however: Training on an augmented sound requires more computational time because there's more data to process. This may not be a problem, because training can be done before live performance starts.
