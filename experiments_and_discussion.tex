@@ -5,7 +5,7 @@
 \chapter{Experiments and Discussion}
 \label{chapter:experiments_and_discussion}
 
-Four experiments have been conducted in an attempt to find good ways to use neuroevolution for finding useful mappings from audio features to audio effect parameters. In each experiment, different neuroevolution configurations are compared to find what works better. Due to the random nature of genetic algorithms, results vary from run to run. To deal with this, each configuration gets multiple runs (with different Pseudo Random Number Generator (PRNG) seeds), and results from the runs are aggregated and presented in various figures. Table \ref{tab:experiments_overview} shows a rough overview of the experiments.
+Five experiments have been conducted in an attempt to find good ways to use neuroevolution for finding useful mappings from audio features to audio effect parameters. In each experiment, different neuroevolution configurations are compared to find what works better. Due to the random nature of genetic algorithms, results vary from run to run. To deal with this, each configuration gets multiple runs (with different Pseudo Random Number Generator (PRNG) seeds), and results from the runs are aggregated and presented in various figures. Table \ref{tab:experiments_overview} shows a rough overview of the experiments.
 
 \begin{center}
 \begin{longtable}{p{2.3cm} p{13cm}}
@@ -26,7 +26,7 @@ Four experiments have been conducted in an attempt to find good ways to use neur
 \endlastfoot
 
 \midrule
-  1 & Find the best combination of mutation rate and crossover rate \\
+  1 & Find a good combination of mutation rate and crossover rate \\
 \midrule
   2 & Find a good value for structural mutation parameters \\
 \midrule
@@ -39,7 +39,7 @@ Four experiments have been conducted in an attempt to find good ways to use neur
 \end{center}
 
 \section{General Configuration}
-Table \ref{tab:general_configuration} shows the parameters used unless otherwise stated in individual experiments. However, this table is not exhaustive. A number of NEAT parameters were left at their respective default values\footnote{\url{https://github.com/peter-ch/MultiNEAT/blob/master/src/Parameters.cpp\#L42}}, set by \citeauthor{multineat}, the authors of MultiNEAT.
+Table \ref{tab:general_configuration} shows the parameters used unless otherwise stated in individual experiments. The table is not exhaustive. A number of NEAT parameters were left at their respective default values\footnote{\url{https://github.com/peter-ch/MultiNEAT/blob/master/src/Parameters.cpp\#L42}}, set by \citeauthor{multineat}, the authors of MultiNEAT.
 
 \begin{center}
 \begin{longtable}{p{10cm} p{4cm}}

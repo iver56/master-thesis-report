@@ -38,7 +38,7 @@ The neuroevolution program is called from the command line, with a number of arg
 \item For each generation, evaluate all individuals, write their data to json files and then advance to the next generation
 \end{enumerate}
 
-The evaluation of an individual involves several operations:
+The evaluation of an individual (illustrated by figure \ref{fig:individual_evaluation_process}) involves several operations:
 
 \begin{enumerate}  
 \item An artificial neural network is created from the genotype of the individual
@@ -51,7 +51,7 @@ The evaluation of an individual involves several operations:
 \item The resulting fitness value is assigned to the individual.
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{06_individual_evaluation_process}
     \caption{Flowchart for the evaluation of an individual}
@@ -112,8 +112,8 @@ The visualization system is a single-page web application written in AngularJS, 
 
 Figure \ref{fig:viz_individual} shows various data visualizations related to the individual selected by the interactive slider. Here are brief explanations of the different parts:
 \begin{itemize}
-\item A: The interactive slider is for selecting a specific individual in the population of the selected generation.
-\item B: Neural network visualization with edge colors according to weight. Light color means small magnitude while strong color means large magnitude. Red means positive weight while blue means negative.
+\item A: The interactive slider is for selecting a specific individual in the population of the selected generation. The interface below it updates whenever a different individual is selected.
+\item B: Neural network visualization with edge colors according to weight. Light color means small magnitude while strong color means large magnitude. Red means positive weight while blue means negative. It is possible to click a node to see a list of exact values for ingoing and outgoing weights.
 \item C: Select which sound and corresponding data series to visualize.
 \item D: Audio player with waveform visualization. Useful for playing back the output sound of the selected individual.
 \item E and F: Horizon charts for visualizing neural input and neural output, respectively. Horizon charts make better use of vertical space than standard area charts, allowing one to see many more metrics at-a-glance. Larger values are overplotted in successively darker colors, while negative values are offset to descend from the top. When hovering over these charts with the mouse pointer, series labels disappear and a rule with values at the hovered time step is shown. The horizon charts are aligned with the audio player.

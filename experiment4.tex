@@ -13,7 +13,7 @@ In this experiment, the aim is to compare two different collections of audio fea
 \end{itemize}
 
 \begin{center}
-\begin{longtable}{p{5cm} p{7cm}}
+\begin{longtable}{p{5cm} p{8cm}}
 \caption[Experiment configuration]{Experiment configuration} \label{tab:exp4_configuration} \\
 
 \hline \multicolumn{1}{l}{\textbf{Parameter}} & \multicolumn{1}{l}{\textbf{Value}} \\ \hline 
@@ -58,12 +58,12 @@ The results in the second configuration, were much better. The author could hear
 The takeaway from this experiment is that
 \begin{itemize}  
 \item the collection of features used for similarity measures has a high impact on the result
-\item bark bands are useful
+\item bark bands are useful when used in the similarity measure
 \end{itemize}
 
 \subsection{Neuroevolution Analysis}
 
-In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice, and identify some things that can be improved upon.
+In this subsection, one of the runs in configuration B will be analyzed, to get a better understanding of how NEAT works in practice, and to identify some things that can be improved upon.
 
 In this experiment, the effect parameters do not have to be \textit{dynamically} controlled over time. A static value for each effect parameter (bandwidth, center frequency and post gain) would have been an optimal solution. However, in figure \ref{fig:exp4_typical_nn_evolution}, we see that the NEAT algorithm actually makes use all three input nodes (RMS, pitch and spectral centroid) as well as the constand bias node. The reason for this is that these three inputs do not vary much in the course of the sound, because the features of the sound that was analyzed (sine, 440 Hz) do not vary much over time (see the horizon chart in figure \ref{fig:exp4_neural_input}). Consequently, these three nodes act like a bias node with some noise.
 
@@ -82,6 +82,8 @@ In this experiment, the effect parameters do not have to be \textit{dynamically}
 \end{figure}
 
 Another interesting fact is that the number of hidden nodes in the best individual tends to increase over the generations, even though these hidden nodes are not needed to get an optimal solution in this experiment. Any constant value can be sent to the output node without having to go through hidden nodes. This is another example of NEAT not finding the optimal solution. Having many hidden nodes hurts evolvability, because an arbitrary mutation on a complex individual is less likely to yield an improvement than the same operation on a simpler individual with fewer hidden nodes. Some form of regularization (punishment for more complex neural networks) could alleviate the problem. Another way to deal with this problem in experiments that do not require hidden nodes is setting AddNodeProbability to zero.
+
+Figure \ref{fig:exp4_fitness_plot} shows a line chart of max fitness and average fitness. The max fitness does not increase in every generation. This is due to the random nature of the mutations. As the iterative process approaches convergence, jumps in max fitness become smaller and smaller.
 
 \begin{figure}[H]
     \centering
